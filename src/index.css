@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.card-group {
+  display: flex;
+  justify-content: space-around;
+  gap: 3em;
+}
+
+.card {
+  background-color: rgb(44, 125, 191);
+  border-radius: 1em;
+  box-shadow: 2px 2px rgb(187, 187, 187);
+  height: auto;
+  color: white;
+  width: 10em;
+  height: 10em;
+  text-align: center;
+}
+
+.card[data-flipped='true'] {
+  background-color: rgb(39, 142, 227);
+}
