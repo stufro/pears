@@ -15,9 +15,16 @@ function Game() {
   const [cards, setCards] = useState(cardData)
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [gameStatus, setGameStatus] = useState("Select 2 cards")
 
   const handleChoice = (chosenCard) => {
     choiceOne ? setChoiceTwo(chosenCard) : setChoiceOne(chosenCard)
+  }
+
+  const resetTurn = () => {
+    setGameStatus("Select 2 cards")
+    setChoiceOne(null)
+    setChoiceTwo(null)
   }
 
   useEffect(() => {
@@ -33,24 +40,27 @@ function Game() {
 
           })
         })
-        setChoiceOne(null)
-        setChoiceTwo(null)
+        setGameStatus("It's a match!")
+
       } else {
-        setTimeout(() => {
-          setChoiceOne(null)
-          setChoiceTwo(null)
-        }, 1000)
+        setGameStatus("No match!")
       }
+      setTimeout(() => { resetTurn() }, 1000)
     }
-  }, [choiceOne, choiceTwo])
+  }, [choiceOne, choiceTwo]
+  )
 
   return (
     <div className="App">
       <div className="card-group">
         {cards.map((card) => {
           return <Card key={card.id} card={card} flipped={card === choiceOne || card === choiceTwo || card.matched}
-                  handleChoice={handleChoice} />
+            handleChoice={handleChoice} />
         })}
+      </div>
+
+      <div className="status">
+        {gameStatus}
       </div>
     </div>
   );

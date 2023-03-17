@@ -8,6 +8,8 @@ function Card({card, flipped, handleChoice}) {
   return(
     <div className="card" onClick={handleClick} data-flipped={flipped}>
       {content}
+
+      { card.matched ? <p>✅</p> : null }
     </div>
   )
 }
