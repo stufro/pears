@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './index.css';
 import Card from './Card'
+import TransformsCards from './TransformCards'
 
 const cardData = [
   { id: 1, word: "Foo", matched: false },
@@ -30,15 +31,8 @@ function Game() {
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.word === choiceTwo.word) {
-        setCards(previousCards => {
-          return previousCards.map(card => {
-            if (card.word === choiceOne.word) {
-              return { ...card, matched: true }
-            } else {
-              return card
-            }
-
-          })
+        setCards(cards => {
+          return TransformsCards.setMatched(cards, choiceOne.word)
         })
         setGameStatus("It's a match!")
 
@@ -47,8 +41,10 @@ function Game() {
       }
       setTimeout(() => { resetTurn() }, 1000)
     }
-  }, [choiceOne, choiceTwo]
-  )
+  }, [choiceOne, choiceTwo])
+
+  useEffect(() => {
+  })
 
   return (
     <div className="App">
